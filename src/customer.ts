@@ -1,13 +1,15 @@
+import Address from './address';
+
 class Customer {
   id: string;
 
   name: string;
 
-  address: string;
+  address: Address;
 
   active: boolean;
 
-  constructor(id: string, name: string, address: string) {
+  constructor(id: string, name: string, address: Address) {
     this.id = id;
     this.name = name;
     this.address = address;
@@ -28,12 +30,16 @@ class Customer {
     this.active = false;
   }
 
+  setAddress(address: Address): void {
+    this.address = address;
+  }
+
   validate(): void {
     if (!this.name || this.name.length === 0) {
       throw new Error('Name is required');
     }
-    if (!this.address || this.address.length === 0) {
-      throw new Error('Address is required');
+    if (this.id.length === 0) {
+      throw new Error('Id is required');
     }
   }
 }
