@@ -9,7 +9,7 @@ export default class Address {
 
   private number: number;
 
-  constructor(street: string, city: string, state: string, zip: string, number: number) {
+  constructor(street: string, number: number, city: string, state: string, zip: string) {
     this.street = street;
     this.city = city;
     this.state = state;

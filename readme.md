@@ -18,3 +18,7 @@ Precisamos ser capazes de modelarmos de forma mais assertiva os seus principais 
 **Quando você se preocupa apenas com os atributos de um elemento de um model, classifique isso como um Value Object.**
 
 **Trate o Value Object como imutável.**
+
+## Agregado
+
+**Um agregado é um conjunto de objetos associados que tratamos como uma unidade para propósito de mudança de dados.**
