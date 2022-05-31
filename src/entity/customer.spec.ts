@@ -1,0 +1,47 @@
+import Address from './address';
+import Customer from './customer';
+
+describe('Customer unit tests', () => {
+  it('should throw error when id is empty', () => {
+    expect(() => {
+      const customer = new Customer('', 'John');
+    }).toThrowError('Id is required');
+  });
+
+  it('should throw error when name is empty', () => {
+    expect(() => {
+      const customer = new Customer('123', '');
+    }).toThrowError('Name is required');
+  });
+
+  it('should change name', () => {
+    let customer = new Customer('1', 'Vyctor');
+    customer.changeName('Marcos');
+    expect(customer.name).toBe('Marcos');
+  });
+
+  it('should activate customer', () => {
+    const userAddress = new Address('Street', 1, 'Rio Verde', 'Goiás', '75906-860');
+
+    let customer = new Customer('1', 'Vyctor');
+
+    customer.changeAddress(userAddress);
+
+    customer.activate();
+    expect(customer.isActive()).toBe(true);
+  });
+
+  it('should deactivate customer', () => {
+    let customer = new Customer('1', 'Vyctor');
+    customer.deactivate();
+    expect(customer.isActive()).toBe(false);
+  });
+
+  it('should throw error when address is undefined', () => {
+    let customer = new Customer('1', 'Vyctor');
+
+    expect(() => {
+      customer.activate();
+    }).toThrowError('Address is mandatory to activate a customer');
+  });
+});
