@@ -39,3 +39,9 @@ Quando um processo ou transformação significativa no domínio não for uma res
 
 - Quando houver muitos Domain Services em seu projeto, TALVEZ, isso possa indicar que seus agregados estão anêmicos. Um DOMAIN SERVICE com muitos métodos é um BAD SMELL.
 - Domain Services são STATELESS
+
+## Repositories
+
+Um repositório comumente se refere a um local de armazenamento, geralmente considerado um local de segurança ou preservação dos itens nele armazenados. Quando você armazena algo em um repositório e depois retorna para recuperá-lo, você espera que ele esteja no mesmo estado que estava quando você o colocou lá. Em alguma momento, você pode optar por remover o item armazenado no repositório.
+
+Esses objetos semelhantes a coleções são sobre persistência. Todo tipo de **Agregado** persistente terá um **Repositório**. De modo geral, existe uma relação **um-para-um entre um tipo Agregado e um Repositório**.
