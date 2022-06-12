@@ -14,12 +14,24 @@ export default class OrderItem {
     this.validate();
   }
 
+  get id(): string {
+    return this._id;
+  }
+
+  get name(): string {
+    return this._name;
+  }
+
   get price(): number {
     return this._price;
   }
 
   get quantity(): number {
     return this._quantity;
+  }
+
+  get product_id(): string {
+    return this._product_id;
   }
 
   private validate(): void {
@@ -29,7 +41,7 @@ export default class OrderItem {
   }
 
   private validateId(): void {
-    if (!this._id) {
+    if (!this.id) {
       throw new Error('Id is required');
     }
   }

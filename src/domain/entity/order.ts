@@ -35,10 +35,10 @@ export default class Order {
   }
 
   private validate(): void {
-    if (!this._id) {
+    if (!this.id) {
       throw new Error('Id is required');
     }
-    if (!this._customer_id) {
+    if (!this.customer_id) {
       throw new Error('Customer Id is required');
     }
     if (!this.items || this.items.length === 0) {

@@ -13,11 +13,11 @@ describe('Order unit tests', () => {
 
   it('should throw error when customer_id is empty', () => {
     expect(() => {
-      const orderItem = new OrderItem('1', 'p2', '1', 1, 1);
+      const orderItem = new OrderItem('123', 'p2', '1', 1, 1);
       const orderItems: OrderItem[] = [];
       orderItems.push(orderItem);
 
-      const order = new Order('1', '', orderItems);
+      const order = new Order('1', undefined, orderItems);
     }).toThrowError('Customer Id is required');
   });
 
