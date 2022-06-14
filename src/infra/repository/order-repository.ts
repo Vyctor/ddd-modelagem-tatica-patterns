@@ -26,25 +26,20 @@ class OrderRepository implements OrderRepositoryInterface {
   }
 
   async update(entity: Order): Promise<void> {
-    await OrderModel.update(
-      {
-        id: entity.id,
-        customer_id: entity.customer_id,
-        total: entity.total,
-        items: entity.items.map((item) => ({
-          id: item.id,
-          name: item.name,
-          price: item.price,
-          product_id: item.product_id,
-          quantity: item.quantity,
-        })),
-      },
-      {
-        where: {
-          id: entity.id,
-        },
-      },
-    );
+    const order = await OrderModel.findOne({ where: { id: entity.id }, include: [{ model: OrderItemModel }] });
+
+    order.update({
+      id: entity.id,
+      customer_id: entity.customer_id,
+      total: entity.total,
+      items: entity.items.map((item) => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        product_id: item.product_id,
+        quantity: item.quantity,
+      })),
+    });
   }
 
   async delete(id: string): Promise<void> {
@@ -56,7 +51,7 @@ class OrderRepository implements OrderRepositoryInterface {
   }
 
   async find(id: string): Promise<Order> {
-    const order = await OrderModel.findOne({ where: { id } });
+    const order = await OrderModel.findOne({ where: { id }, include: [{ model: OrderItemModel }] });
 
     return new Order(
       order.id,
@@ -68,7 +63,9 @@ class OrderRepository implements OrderRepositoryInterface {
   }
 
   async findAll(): Promise<Order[]> {
-    const orders = await OrderModel.findAll();
+    const orders = await OrderModel.findAll({
+      include: [{ model: OrderItemModel }],
+    });
 
     return orders.map(
       (order) =>
