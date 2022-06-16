@@ -3,19 +3,19 @@ import Product from './product';
 describe('Customer unit tests', () => {
   it('should throw error when id is empty', () => {
     expect(() => {
-      const product = new Product('', 'Product', 100);
+      new Product('', 'Product', 100);
     }).toThrowError('Id is required');
   });
 
   it('should throw error when name is empty', () => {
     expect(() => {
-      const product = new Product('1', '', 100);
+      new Product('1', '', 100);
     }).toThrowError('Name is required');
   });
 
   it('should throw error when price is empty', () => {
     expect(() => {
-      const product = new Product('1', 'Product', -100);
+      new Product('1', 'Product', -100);
     }).toThrowError('Price is required and need to be greater than 0');
   });
 
