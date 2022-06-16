@@ -26,40 +26,42 @@ class OrderRepository implements OrderRepositoryInterface {
   }
 
   async update(entity: Order): Promise<void> {
-    const order = await OrderModel.findOne({ where: { id: entity.id }, include: [{ model: OrderItemModel }] });
+    const sequelize = OrderModel.sequelize;
+    await sequelize.transaction(async (transaction) => {
+      await OrderItemModel.destroy({
+        where: {
+          order_id: entity.id,
+        },
+        transaction: transaction,
+      });
 
-    order.update({
-      id: entity.id,
-      customer_id: entity.customer_id,
-      total: entity.total,
-      items: entity.items.map((item) => ({
+      const items = entity.items.map((item) => ({
         id: item.id,
         name: item.name,
         price: item.price,
         product_id: item.product_id,
         quantity: item.quantity,
-      })),
-    });
-  }
+        order_id: entity.id,
+      }));
 
-  async delete(id: string): Promise<void> {
-    await OrderModel.destroy({
-      where: {
-        id,
-      },
+      await OrderItemModel.bulkCreate(items, { transaction: transaction });
+
+      await OrderModel.update({ total: entity.total }, { where: { id: entity.id }, transaction: transaction });
     });
   }
 
   async find(id: string): Promise<Order> {
     const order = await OrderModel.findOne({ where: { id }, include: [{ model: OrderItemModel }] });
 
-    return new Order(
-      order.id,
-      order.customer_id,
-      order.items.map(
-        (orderItem) => new OrderItem(orderItem.id, orderItem.product_id, orderItem.name, orderItem.price, orderItem.quantity),
-      ),
-    );
+    if (order) {
+      return new Order(
+        order.id,
+        order.customer_id,
+        order.items.map(
+          (orderItem) => new OrderItem(orderItem.id, orderItem.product_id, orderItem.name, orderItem.price, orderItem.quantity),
+        ),
+      );
+    }
   }
 
   async findAll(): Promise<Order[]> {
@@ -77,6 +79,10 @@ class OrderRepository implements OrderRepositoryInterface {
           ),
         ),
     );
+  }
+
+  async delete(id: string): Promise<void> {
+    await OrderModel.destroy({ where: { id } });
   }
 }
 
