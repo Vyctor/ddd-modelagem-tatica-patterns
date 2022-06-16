@@ -4,13 +4,14 @@ import OrderModel from '../database/sequelize/model/order.model';
 import ProductModel from '../database/sequelize/model/product.model';
 import OrderItemModel from '../database/sequelize/model/order-item.model';
 import CustomerRepository from './customer-repository';
-import Address from '../../domain/entity/address';
-import Product from '../../domain/entity/product';
-import Customer from '../../domain/entity/customer';
+import Address from '../../domain/customer/value-object/address';
+ import Customer from '../../domain/customer/entity/customer';
 import ProductRepository from './product-repository';
-import OrderItem from '../../domain/entity/order-item';
-import Order from '../../domain/entity/order';
+ 
 import OrderRepository from './order-repository';
+import OrderItem from '../../domain/checkout/entity/order-item';
+import Order from '../../domain/checkout/entity/order';
+import Product from '../../domain/product/entity/product';
 
 let sequelize: Sequelize;
 

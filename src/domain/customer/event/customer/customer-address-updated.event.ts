@@ -1,4 +1,4 @@
-import EventInterface from '../shared/event.interface';
+import EventInterface from '../../../shared/event.interface';
 class CustomerAddressUpdatedEvent implements EventInterface {
   dateTimeOcurred: Date;
   eventData: any;

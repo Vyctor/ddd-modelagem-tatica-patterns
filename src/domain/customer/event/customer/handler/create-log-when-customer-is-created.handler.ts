@@ -1,4 +1,4 @@
-import EventHandlerInterface from '../../shared/event-handler.interface';
+import EventHandlerInterface from '../../../../shared/event-handler.interface';
 import CustomerCreatedEvent from '../customer-created.event';
 
 class CreateLogWhenCustomerIsCreatedHandler implements EventHandlerInterface<CustomerCreatedEvent> {

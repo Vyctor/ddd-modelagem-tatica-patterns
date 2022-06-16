@@ -1,10 +1,10 @@
-import EventDispatcher from '../shared/event-dispatcher';
 import CustomerCreatedEvent from './customer-created.event';
 import CreateLogWhenCustomerIsCreatedHandler from './handler/create-log-when-customer-is-created.handler';
 import SendValidateAccountEmailWhenCustomerIsCreatedHandler from './handler/send-validate-account-email-when-customer-is-created.handler';
 import CustomerAddressUpdatedEvent from './customer-address-updated.event';
 import Customer from '../../entity/customer';
-import Address from '../../entity/address';
+import Address from '../../value-object/address';
+import EventDispatcher from '../../../shared/event/event-dispatcher';
 
 describe('Customer events tests', () => {
   it('should notify Create Log and Send Validate Account when customer is created', () => {

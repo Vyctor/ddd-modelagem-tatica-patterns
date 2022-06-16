@@ -1,16 +1,16 @@
-import Address from './address';
+import Address from '../value-object/address';
 import Customer from './customer';
 
 describe('Customer unit tests', () => {
   it('should throw error when id is empty', () => {
     expect(() => {
-      const customer = new Customer(undefined, 'John');
+      new Customer(undefined, 'John');
     }).toThrowError('Id is required');
   });
 
   it('should throw error when name is empty', () => {
     expect(() => {
-      const customer = new Customer('123', '');
+      new Customer('123', '');
     }).toThrowError('Name is required');
   });
 
