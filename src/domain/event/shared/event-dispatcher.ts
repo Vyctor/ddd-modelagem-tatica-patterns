@@ -23,11 +23,15 @@ class EventDispatcher implements EventDispatcherInterface {
   }
 
   unregister(eventName: string, eventHandler: EventHandlerInterface<EventInterface>): void {
-    throw new Error('Method not implemented.');
+    const index = this.eventHandlers[eventName].indexOf(eventHandler);
+
+    if (index >= -1) {
+      this.eventHandlers[eventName].splice(index, 1);
+    }
   }
 
   unregisterAll(): void {
-    throw new Error('Method not implemented.');
+    this._eventHandlers = {};
   }
 }
 
