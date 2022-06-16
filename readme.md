@@ -79,3 +79,12 @@ Todo evento deve ser representado em uma ação realizada no passado:
 - Registrar o Evento juntamente com o Handler no Event Dispatcher
 
 Agora para disparar um evento, basta executar o método notify do Event Dispatcher. Nesse momento todos os Handlers registrados no evento serão executados.
+
+### Módulos
+
+Em um contexto de DDD, Módulos em seu modelo servem como contêineres nomeados para classes de objetos de domínio que são altamente coesas entre si. O objeto deve ter baixo acoplamento entre as classes que estão em módulos diferentes. Com os módulos usados no DDD não são compartimentos de armazenamento anêmicos ou genéricos, também é importante nomear adequadamente os módulos.
+
+- Deve respeitar a linguagem universal
+- Baixo acoplamento
+- Um ou mais agregados devem estar juntos somente se fazem sentido
+- Devem respeitar a mesma divisão quando estão em camadas diferentes
