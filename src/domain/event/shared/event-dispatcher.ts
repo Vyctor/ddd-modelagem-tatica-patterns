@@ -11,10 +11,6 @@ class EventDispatcher implements EventDispatcherInterface {
     return this._eventHandlers;
   }
 
-  notify(event: EventInterface): void {
-    throw new Error('Method not implemented.');
-  }
-
   register(eventName: string, eventHandler: EventHandlerInterface<EventInterface>): void {
     if (!this.eventHandlers[eventName]) {
       this.eventHandlers[eventName] = [];
@@ -32,6 +28,15 @@ class EventDispatcher implements EventDispatcherInterface {
 
   unregisterAll(): void {
     this._eventHandlers = {};
+  }
+
+  notify(event: EventInterface): void {
+    const eventName = event.constructor.name;
+    const eventHandlers = this.eventHandlers[eventName];
+
+    if (eventHandlers) {
+      eventHandlers.forEach((eventHandler) => eventHandler.handle(event));
+    }
   }
 }
 
