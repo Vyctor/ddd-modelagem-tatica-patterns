@@ -1,4 +1,5 @@
-import EventInterface from '../shared/event.interface';
+import EventInterface from '../../shared/event/event.interface';
+
 class ProductCreatedEvent implements EventInterface {
   dateTimeOcurred: Date;
   eventData: any;
